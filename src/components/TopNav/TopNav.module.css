@@ -1,0 +1,15 @@
+.outer {
+  @apply bg-[#212121] flex justify-center px-10 py-1 pb-2 shadow text-white sticky top-0 z-50;
+}
+
+.inner {
+  @apply container flex items-center justify-between gap-2;
+}
+
+.logo {
+  @apply grayscale hover:grayscale-0 transition-all;
+}
+
+.admin {
+  @apply text-sm text-gray-500 hover:text-white transition-colors ease-in-out;
+}

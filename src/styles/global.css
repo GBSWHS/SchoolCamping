@@ -6,6 +6,10 @@
 @import '@fontsource/noto-sans-kr/400';
 @import '@fontsource/noto-sans-kr/700';
 
+html {
+  @apply scroll-smooth;
+}
+
 body {
   font-family: 'Noto Sans KR', sans-serif;
   

@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPencil } from '@fortawesome/free-solid-svg-icons'
 import * as style from './Jumbotron.module.css'
+import { Link } from 'gatsby'
 
 const Jumbotron = () =>
   <Fragment>
@@ -29,12 +30,17 @@ const Jumbotron = () =>
           스쿨캠핑 예약을 쉽고 빠르게
         </p>
 
-        <motion.button
-          className={style.goSubmit}>
-          <FontAwesomeIcon icon={faPencil} />
-          &nbsp;
-          신청하기
-        </motion.button>
+        <Link to="/form">
+          <motion.button
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ delay: 0.5 }}
+            className={style.goSubmit}>
+            <FontAwesomeIcon icon={faPencil} />
+            &nbsp;
+            신청하기
+          </motion.button>
+        </Link>
       </div>
     </div>
   </Fragment>
