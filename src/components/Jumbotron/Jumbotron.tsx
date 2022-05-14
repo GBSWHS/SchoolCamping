@@ -8,20 +8,25 @@ import { Link } from 'gatsby'
 
 const Jumbotron = () =>
   <Fragment>
-    <StaticImage
-      className={style.background}
-      alt="스쿨캠핑 전경"
-      src="./images/1652532764760.jpg"
-      placeholder="dominantColor" />
-
+    <div className={style.bgouter}>
+      <StaticImage
+        className={style.background}
+        alt="스쿨캠핑 전경"
+        src="./images/1652532764760.jpg"
+        placeholder="dominantColor" />
+    </div>
     <div className={style.outer}>
       <div className={style.inner}>
-        <StaticImage
-          placeholder="blurred"
-          width={100}
-          height={100}
-          alt="스쿨캠핑 로고"
-          src="../../images/icon.png" />
+        <motion.div
+          initial={{ rotate: '90deg' }}
+          animate={{ rotate: '0deg' }}>
+          <StaticImage
+            placeholder="blurred"
+            width={100}
+            height={100}
+            alt="스쿨캠핑 로고"
+            src="../../images/icon.png" />
+        </motion.div>
 
         <h1 className={style.title}>
           스쿨캠핑

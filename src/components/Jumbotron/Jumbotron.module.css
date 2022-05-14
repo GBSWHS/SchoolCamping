@@ -1,15 +1,16 @@
+.bgouter {
+  @apply
+  absolute bg-gray-900 top-10 -z-10;
+}
+
 .background {
   @apply
-  scale-[1.1]
-  blur brightness-50
-  absolute -z-10
-  w-screen h-screen 
-  bg-black;
+  w-screen h-screen bg-black blur brightness-50;
 }
 
 .outer {
   @apply
-    flex items-center justify-center w-screen h-screen text-white;
+  flex items-center justify-center w-screen h-screen text-white -top-10;
 }
 
 .inner {

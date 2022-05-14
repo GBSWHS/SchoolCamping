@@ -1,5 +1,5 @@
 .outer {
-  @apply bg-[#212121] flex justify-center px-10 py-1 pb-2 shadow text-white sticky top-0 z-50;
+  @apply bg-[#212121] flex justify-center px-10 py-1 pb-2 shadow text-white sticky top-0;
 }
 
 .inner {

@@ -11,7 +11,6 @@ const IndexPage = () =>
 
     <TopNav />
     <Jumbotron />
-    {/* Content */}
   </Fragment>
 
 export default IndexPage
