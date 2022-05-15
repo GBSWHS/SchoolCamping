@@ -1,3 +1,6 @@
+import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import moment from 'moment'
 import React from 'react'
 import useSWR from 'swr'
 import * as style from './ListView.module.css'
@@ -11,8 +14,7 @@ const ListView = () => {
     <div className={style.outer}>
       <div className={style.inner}>
         <h2 className={style.title}>
-          Reserves.&nbsp;
-          <span>예약목록.</span>
+          Reserves.
         </h2>
 
         <table className={style.table}>
@@ -21,7 +23,7 @@ const ListView = () => {
               <th>대표자</th>
               <th>동행교사</th>
               <th>예약일</th>
-              <th>작업</th>
+              <th>설정</th>
             </tr>
           </thead>
           <tbody>
@@ -32,7 +34,11 @@ const ListView = () => {
               <tr key={v.id}>
                 <td>{v.mates.split(' ')[0]}</td>
                 <td>{v.teacher}</td>
-                <td>{v.reserved_at}</td>
+                <td>{moment(v.reserved_at).format('MM/DD')}</td>
+                <td className={style.actions}>
+                  <FontAwesomeIcon icon={faEdit}/>
+                  <FontAwesomeIcon icon={faTrash}/>
+                </td>
               </tr>
             ))}
           </tbody>

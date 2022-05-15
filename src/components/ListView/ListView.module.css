@@ -19,9 +19,26 @@
 }
 
 .table {
-  @apply w-full text-center;
+  @apply flex flex-col w-full my-10 text-center border-hidden; 
+}
+
+.table > thead {
+  @apply block w-full py-1 bg-yellow-600 rounded-full;
 }
 
 .table > * > tr {
-  @apply border-b;
+  @apply flex justify-around w-full;
 }
+
+.table > * > tr > * {
+  @apply w-full;
+}
+
+.table > tbody > tr {
+  @apply py-2 text-gray-400 border-b border-gray-700 cursor-pointer hover:underline hover:text-white transition-colors ease-in-out;
+}
+
+.actions {
+  @apply flex items-center justify-center gap-2;
+}
+
