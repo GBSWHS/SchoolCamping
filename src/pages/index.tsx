@@ -2,6 +2,7 @@ import React, { Fragment } from 'react'
 import { Helmet } from 'react-helmet'
 import TopNav from '../components/TopNav/TopNav'
 import Jumbotron from '../components/Jumbotron/Jumbotron'
+import ListView from '../components/ListView/ListView'
 
 const IndexPage = () =>
   <Fragment>
@@ -11,6 +12,7 @@ const IndexPage = () =>
 
     <TopNav />
     <Jumbotron />
+    <ListView />
   </Fragment>
 
 export default IndexPage

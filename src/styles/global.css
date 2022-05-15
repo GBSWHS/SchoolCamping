@@ -7,7 +7,7 @@
 @import '@fontsource/noto-sans-kr/700';
 
 html {
-  @apply bg-[#212121] scroll-smooth;
+  @apply bg-[#212121] snap-x scroll-smooth;
 }
 
 body {

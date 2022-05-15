@@ -1,0 +1,27 @@
+.outer {
+  @apply
+  flex justify-center px-5 py-10 snap-always snap-center;
+}
+
+.inner {
+  @apply
+  container flex flex-col items-start text-white gap-2;
+}
+
+.title {
+  @apply
+  inline-block pr-3 text-2xl border-b-2;
+}
+
+.title > span {
+  @apply
+  text-sm;
+}
+
+.table {
+  @apply w-full text-center;
+}
+
+.table > * > tr {
+  @apply border-b;
+}

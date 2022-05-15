@@ -5,12 +5,12 @@
 
 .background {
   @apply
-  w-screen h-screen bg-black blur brightness-50;
+  w-screen h-screen bg-black blur-sm brightness-50;
 }
 
 .outer {
   @apply
-  flex items-center justify-center w-screen h-screen text-white -top-10;
+  flex items-center justify-center w-screen h-screen text-white snap-always snap-center -z-10;
 }
 
 .inner {
@@ -32,4 +32,3 @@
   @apply
   px-5 py-2 mt-4 border rounded-full transition-colors ease-in-out hover:text-black hover:bg-white;
 }
-
