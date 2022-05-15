@@ -1,0 +1,3 @@
+.modal {
+  @apply fixed top-0 z-50 w-screen h-screen text-white bg-black/50;
+}
