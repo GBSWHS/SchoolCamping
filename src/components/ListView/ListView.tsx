@@ -11,7 +11,7 @@ const ListView = () => {
   const { data, error } = useSWR('https://mocki.io/v1/201d8bfc-c0cc-4427-8fa7-ab7579bf50bc', fetcher)
 
   return (
-    <div className={style.outer}>
+    <div className={style.outer} id="reserves">
       <div className={style.inner}>
         <h2 className={style.title}>
           Reserves.

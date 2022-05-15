@@ -2,7 +2,7 @@ import { StaticImage } from 'gatsby-plugin-image'
 import React, { Fragment } from 'react'
 import { motion } from 'framer-motion'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPencil } from '@fortawesome/free-solid-svg-icons'
+import { faArrowDown, faPencil, faScroll, faScrollTorah } from '@fortawesome/free-solid-svg-icons'
 import * as style from './Jumbotron.module.css'
 import { Link } from 'gatsby'
 
@@ -16,6 +16,7 @@ const Jumbotron = () =>
         placeholder="dominantColor" />
     </div>
     <div className={style.outer}>
+      <div />
       <div className={style.inner}>
         <motion.div
           initial={{ rotate: '90deg' }}
@@ -47,6 +48,11 @@ const Jumbotron = () =>
           </motion.button>
         </Link>
       </div>
+      <Link to="#reserves" className={style.downArrow}>
+        <FontAwesomeIcon icon={faArrowDown}/>
+        예약 목록 보기
+        <FontAwesomeIcon icon={faArrowDown}/>
+      </Link>
     </div>
   </Fragment>
 

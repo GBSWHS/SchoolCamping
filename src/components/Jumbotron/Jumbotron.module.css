@@ -10,7 +10,7 @@
 
 .outer {
   @apply
-  flex items-center justify-center w-screen h-screen text-white snap-always snap-center -z-10;
+  flex flex-col items-center justify-between w-screen h-screen text-white snap-always snap-center -z-10;
 }
 
 .inner {
@@ -31,4 +31,12 @@
 .goSubmit {
   @apply
   px-5 py-2 mt-4 border rounded-full transition-colors ease-in-out hover:text-black hover:bg-white;
+}
+
+.downArrow { 
+  @apply flex items-end py-2 gap-2;
+}
+
+.downArrow > svg {
+  @apply animate-bounce;
 }
