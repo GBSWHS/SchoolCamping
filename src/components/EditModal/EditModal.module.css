@@ -26,12 +26,24 @@
   @apply text-base;
 }
 
-.list {
-  @apply flex flex-wrap mt-1 gap-2;
+.mateList {
+  @apply flex items-center justify-between gap-3;
 }
 
-.list > li {
-  @apply px-2 py-1 bg-yellow-600 rounded transition-colors ease-in-out hover:bg-yellow-700;
+.mateInput {
+  /* TODO */
+}
+
+.addmate {
+  /* TODO */
+}
+
+.deletemate {
+  /* TODO */
+}
+
+.submit {
+  /* TODO */
 }
 
 .background {
