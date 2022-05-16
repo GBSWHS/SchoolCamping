@@ -1,0 +1,51 @@
+.modal {
+  @apply fixed top-0 z-50 flex items-start justify-center w-screen h-screen p-5 text-white bg-black/50;
+}
+
+.front {
+  @apply bg-[#212121] w-full flex flex-col gap-2 max-w-sm shadow;
+}
+
+.titlebar {
+  @apply flex justify-between px-5 py-2 border-b border-b-gray-500;
+}
+
+.titlebar > h3 {
+  @apply text-lg font-bold;
+}
+
+.titlebar > button {
+  @apply hover:rotate-180 transition-transform ease-in-out;
+}
+
+.body {
+  @apply relative flex flex-col px-5 pt-2 pb-4 text-sm cursor-default gap-5;
+}
+
+.body > * > p {
+  @apply text-base;
+}
+
+.mateList {
+  @apply flex items-center justify-between gap-3;
+}
+
+.mateInput {
+  /* TODO */
+}
+
+.addmate {
+  /* TODO */
+}
+
+.deletemate {
+  /* TODO */
+}
+
+.submit {
+  /* TODO */
+}
+
+.background {
+  @apply absolute bottom-0 right-0 mr-2 opacity-40;
+}
