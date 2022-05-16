@@ -38,10 +38,11 @@ const DeleteModal = ({ onFinish, id }: any) => {
         </div>
         <div className={style.body}>
           <div>
-            <p>비밀번호</p>
+            <p className={style.label}>비밀번호</p>
             <input
               type="password"
               value={password}
+              className={style.input}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="여기를 눌러 입력하세요" />
           </div>
