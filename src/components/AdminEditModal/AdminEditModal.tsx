@@ -1,13 +1,13 @@
 import React, { createRef, FormEvent, MouseEventHandler, useState } from 'react'
 import { motion } from 'framer-motion'
-import * as style from './EditModal.module.css'
+import * as style from './AdminEditModal.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import 'react-datepicker/dist/react-datepicker.css'
 import { faPlus, faTrashAlt, faX } from '@fortawesome/free-solid-svg-icons'
 import ReactDatePicker, { CalendarContainer } from 'react-datepicker'
 import { StaticImage } from 'gatsby-plugin-image'
 
-const EditModal = ({ onFinish, data }: any) => {
+const AdminEditModal = ({ onFinish, data }: any) => {
   const ref = createRef<HTMLDivElement>()
   const [mates, setMates] = useState<string[]>(data.mates.split(' '))
   const [teacher, setTeacher] = useState<string>(data.teacher)
@@ -110,15 +110,6 @@ const EditModal = ({ onFinish, data }: any) => {
               className={style.input}/>
           </div>
           <div>
-            <p className={style.label}>비밀번호</p>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="여기를 눌러 입력하세요"
-              className={style.input} />
-          </div>
-          <div>
             <button className={style.submit} onClick={onSubmit}>
               저장
             </button>
@@ -137,4 +128,4 @@ const EditModal = ({ onFinish, data }: any) => {
   )
 }
 
-export default EditModal
+export default AdminEditModal

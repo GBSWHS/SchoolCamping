@@ -27,7 +27,7 @@ const ViewModal = ({ onFinish, data }: any) => {
 
       <div className={style.front}>
         <div className={style.titlebar}>
-          <h3>{data.id}번째 캠핑</h3>
+          <h3>{data.mates.split(' ')[0]}님의 캠핑</h3>
           <button onClick={onFinish}>
             <FontAwesomeIcon icon={faX}/>
           </button>

@@ -32,3 +32,11 @@
 .actions {
   @apply flex items-center justify-center gap-2;
 }
+
+.editBtn {
+  @apply transition-colors hover:text-yellow-600;
+}
+
+.deleteBtn {
+  @apply transition-colors hover:text-red-500;
+}
