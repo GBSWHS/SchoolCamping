@@ -36,7 +36,7 @@ const Jumbotron = () =>
           스쿨캠핑 예약을 쉽고 빠르게
         </p>
 
-        <Link to="/form">
+        <Link to="/reserve">
           <motion.button
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}

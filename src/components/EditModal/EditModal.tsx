@@ -39,13 +39,6 @@ const EditModal = ({ onFinish, data }: any) => {
     onFinish()
   }
 
-  const CalendarViewContainer = ({ _, children }: any) =>
-    <CalendarContainer>
-      <div className={style.calendar}>
-        {children}
-      </div>
-    </CalendarContainer>
-
   return (
     <motion.div
       ref={ref}

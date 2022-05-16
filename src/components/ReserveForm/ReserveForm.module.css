@@ -1,0 +1,43 @@
+.bgouter {
+  @apply
+  absolute bg-gray-900 top-10 -z-10;
+}
+
+.background {
+  @apply
+  w-screen h-screen bg-black blur brightness-50;
+}
+
+.outer {
+  @apply
+  flex flex-col items-center justify-center w-screen h-screen text-white shadow snap-always snap-center -z-10;
+}
+
+.inner {
+  @apply
+  flex flex-col items-center gap-4 bg-[#212121] p-5;
+}
+
+.content {
+  @apply flex flex-col items-center gap-4;
+}
+
+.title {
+  @apply px-4 py-1 text-2xl border-b;
+}
+
+.input {
+  @apply w-full max-w-xs px-2 py-1 text-black border-gray-500 rounded-md;
+}
+
+.mateList {
+  @apply flex items-center gap-3;
+}
+
+.addmate {
+  @apply text-sm font-bold;
+}
+
+.deletemate {
+  @apply text-white hover:text-red-400 duration-150;
+}
