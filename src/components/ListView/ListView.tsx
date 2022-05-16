@@ -1,9 +1,10 @@
+import useSWR from 'swr'
+import moment from 'moment'
+import React, { useState } from 'react'
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { AnimatePresence } from 'framer-motion'
-import moment from 'moment'
-import React, { useState } from 'react'
-import useSWR from 'swr'
+
 import ViewModal from '../ViewModal/ViewModal'
 import * as style from './ListView.module.css'
 
