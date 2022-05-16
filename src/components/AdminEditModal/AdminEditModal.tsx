@@ -36,6 +36,27 @@ const AdminEditModal = ({ onFinish, data }: any) => {
   }
 
   const onSubmit = async () => {
+    const res = await fetch('/api/admin/reserve?id=' + data.id, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        teacher,
+        mates: mates.join(' '),
+        date: {
+          year: date.getFullYear(),
+          month: date.getMonth() + 1,
+          day: date.getDate()
+        }
+      })
+    }).then(res => res.json())
+      .catch(err => alert(err.message))
+
+    if (!res.success) {
+      alert(res.message)
+      return
+    }
+
+    alert('수정되었습니다.')
     onFinish()
   }
 

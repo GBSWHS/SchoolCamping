@@ -16,7 +16,7 @@ const AdminPasswordForm = ({ onFinished }: Props) => {
 
   const handleSubmit = async () => {
     setMessage('정보 확인중입니다.')
-    const res = await fetch('http://15.165.114.36:3001/api/auth/admin', {
+    const res = await fetch('/api/auth/admin', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ password })

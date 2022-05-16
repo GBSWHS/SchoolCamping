@@ -17,6 +17,17 @@ const AdminDeleteMOdal = ({ onFinish, data }: any) => {
   }
 
   const onSubmit = async () => {
+    const res = await fetch('/api/admin/reserve?id=' + data.id, {
+      method: 'DELETE'
+    }).then(res => res.json())
+      .catch(err => alert(err.message))
+
+    if (!res.success) {
+      alert(res.message)
+      return
+    }
+
+    alert('삭제되었습니다.')
     onFinish()
   }
 

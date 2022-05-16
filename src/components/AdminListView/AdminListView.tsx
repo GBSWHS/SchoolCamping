@@ -12,7 +12,7 @@ import AdminEditModal from '../AdminEditModal/AdminEditModal'
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json())
 const AdminListView = () => {
-  const { data, error } = useSWR('https://mocki.io/v1/201d8bfc-c0cc-4427-8fa7-ab7579bf50bc', fetcher)
+  const { data, error } = useSWR('/api/Camping/reserves', fetcher)
   const [infoModalOpened, setInfoModalOpened] = useState(false)
   const [editModalOpened, setEditModalOpened] = useState(false)
   const [deleteModalOpened, setDeleteModalOpened] = useState(false)
@@ -60,7 +60,7 @@ const AdminListView = () => {
               <tr key={v.id} onClick={handleDetail(v.id)}>
                 <td>{v.mates.split(' ')[0]}</td>
                 <td>{v.teacher}</td>
-                <td>{moment(v.reserved_at).format('MM/DD')}</td>
+                <td>{moment(v.reservedAt).format('MM/DD')}</td>
                 <td className={style.actions}>
                   <FontAwesomeIcon
                     onClick={handleEdit(v.id)}
