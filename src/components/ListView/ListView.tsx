@@ -8,6 +8,7 @@ import { AnimatePresence } from 'framer-motion'
 import ViewModal from '../ViewModal/ViewModal'
 import * as style from './ListView.module.css'
 import EditModal from '../EditModal/EditModal'
+import DeleteModal from '../DeleteModal/DeleteModal'
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json())
 
@@ -15,6 +16,7 @@ const ListView = () => {
   const [selected, setSelected] = useState(0)
   const [viewModalOpened, setViewModalOpend] = useState(false)
   const [editModalOpened, setEditModalOpend] = useState(false)
+  const [deleteModalOpened, setDeleteModalOpend] = useState(false)
   const { data, error, mutate } = useSWR('https://mocki.io/v1/201d8bfc-c0cc-4427-8fa7-ab7579bf50bc', fetcher)
 
   const handleDetail =
@@ -33,9 +35,20 @@ const ListView = () => {
       setEditModalOpend(true)
     }
 
+  const handleDelete =
+    (id: number) => () => {
+      setSelected(id)
+      setDeleteModalOpend(true)
+    }
+
   const onEditModalFinished = () => {
     mutate()
     setEditModalOpend(false)
+  }
+
+  const onDeleteModalFinished = () => {
+    mutate()
+    setDeleteModalOpend(false)
   }
 
   return (
@@ -69,7 +82,10 @@ const ListView = () => {
                       onClick={handleEdit(v.id)}
                       className={style.editBtn}
                       icon={faEdit}/>
-                    <FontAwesomeIcon className={style.deleteBtn} icon={faTrash}/>
+                    <FontAwesomeIcon
+                      onClick={handleDelete(v.id)}
+                      className={style.deleteBtn}
+                      icon={faTrash}/>
                   </td>
                 </tr>
               ))}
@@ -92,6 +108,13 @@ const ListView = () => {
             onFinish={onEditModalFinished}
             data={data.data.find((v: any) =>
               v.id === selected)}/>}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {deleteModalOpened &&
+          <DeleteModal
+            id={selected}
+            onFinish={onDeleteModalFinished}/>}
       </AnimatePresence>
    </div>
   )
