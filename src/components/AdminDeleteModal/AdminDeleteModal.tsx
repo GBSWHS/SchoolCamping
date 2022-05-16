@@ -1,11 +1,11 @@
 import React, { createRef, MouseEventHandler, useState } from 'react'
 import { motion } from 'framer-motion'
-import * as style from './DeleteModal.module.css'
+import * as style from './AdminDeleteModal.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faX } from '@fortawesome/free-solid-svg-icons'
 import { StaticImage } from 'gatsby-plugin-image'
 
-const DeleteModal = ({ onFinish, data }: any) => {
+const AdminDeleteMOdal = ({ onFinish, data }: any) => {
   const ref = createRef<HTMLDivElement>()
   const [password, setPassword] = useState<string>('')
 
@@ -17,6 +17,17 @@ const DeleteModal = ({ onFinish, data }: any) => {
   }
 
   const onSubmit = async () => {
+    const res = await fetch('/api/admin/reserve?id=' + data.id, {
+      method: 'DELETE'
+    }).then(res => res.json())
+      .catch(err => alert(err.message))
+
+    if (!res.success) {
+      alert(res.message)
+      return
+    }
+
+    alert('삭제되었습니다.')
     onFinish()
   }
 
@@ -38,15 +49,6 @@ const DeleteModal = ({ onFinish, data }: any) => {
         </div>
         <div className={style.body}>
           <div>
-            <p className={style.label}>비밀번호</p>
-            <input
-              type="password"
-              value={password}
-              className={style.input}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="여기를 눌러 입력하세요" />
-          </div>
-          <div>
             <button className={style.submit} onClick={onSubmit}>
               삭제
             </button>
@@ -65,4 +67,4 @@ const DeleteModal = ({ onFinish, data }: any) => {
   )
 }
 
-export default DeleteModal
+export default AdminDeleteMOdal

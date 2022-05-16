@@ -113,10 +113,11 @@ const ListView = () => {
       <AnimatePresence>
         {deleteModalOpened &&
           <DeleteModal
-            id={selected}
+            data={data.data.find((v: any) =>
+              v.id === selected)}
             onFinish={onDeleteModalFinished}/>}
       </AnimatePresence>
-   </div>
+    </div>
   )
 }
 
