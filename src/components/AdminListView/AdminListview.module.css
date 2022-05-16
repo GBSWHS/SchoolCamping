@@ -14,7 +14,7 @@
 }
 
 .table > thead {
-  @apply block w-full py-1 bg-yellow-600;
+  @apply block w-full py-1 bg-yellow-600 rounded-full;
 }
 
 .table > * > tr {

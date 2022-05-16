@@ -5,17 +5,21 @@ import moment from 'moment'
 import * as style from './AdminListview.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
-import AdminInfoModal from '../AdminInfoModal/AdminInfoModal'
 import { AnimatePresence } from 'framer-motion'
+import ViewModal from '../ViewModal/ViewModal'
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json())
 const AdminListView = () => {
-  const { data, error } = useSWR('http://15.165.114.36:3001/api/camping/reserves', fetcher)
+  const { data, error } = useSWR('https://mocki.io/v1/201d8bfc-c0cc-4427-8fa7-ab7579bf50bc', fetcher)
   const [infoModalOpend, setInfoModalOpend] = useState(false)
   const [selected, setSelected] = useState(0)
 
   const handleDetail =
-    (id: number) => {
+    (id: number) => (e: any) => {
+      if (!['TD', 'TR'].includes(e.target.tagName)) {
+        return
+      }
+
       setSelected(id)
       setInfoModalOpend(true)
     }
@@ -37,7 +41,7 @@ const AdminListView = () => {
             {!data && error && 'Error! ' + error}
             {data && !data.success && 'Error! ' + data.message}
             {data && data.success && data.data.map((v: any) => (
-              <tr key={v.id} onClick={() => handleDetail(v.id)}>
+              <tr key={v.id} onClick={ handleDetail(v.id)}>
                 <td>{v.mates.split(' ')[0]}</td>
                 <td>{v.teacher}</td>
                 <td>{moment(v.reservedAt).format('MM/DD')}</td>
@@ -52,7 +56,7 @@ const AdminListView = () => {
       </div>
       <AnimatePresence>
         { infoModalOpend &&
-          <AdminInfoModal
+          <ViewModal
             onFinish={() => setInfoModalOpend(false)}
             data={data.data.find((v: any) =>
               v.id === selected)}

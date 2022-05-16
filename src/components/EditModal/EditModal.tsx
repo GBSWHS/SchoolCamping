@@ -4,7 +4,7 @@ import * as style from './EditModal.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import 'react-datepicker/dist/react-datepicker.css'
 import { faPlus, faTrashAlt, faX } from '@fortawesome/free-solid-svg-icons'
-import ReactDatePicker from 'react-datepicker'
+import ReactDatePicker, { CalendarContainer } from 'react-datepicker'
 import { StaticImage } from 'gatsby-plugin-image'
 
 const EditModal = ({ onFinish, data }: any) => {
@@ -39,6 +39,13 @@ const EditModal = ({ onFinish, data }: any) => {
     onFinish()
   }
 
+  const CalendarViewContainer = ({ _, children }: any) =>
+    <CalendarContainer>
+      <div className={style.calendar}>
+        {children}
+      </div>
+    </CalendarContainer>
+
   return (
     <motion.div
       ref={ref}
@@ -57,15 +64,14 @@ const EditModal = ({ onFinish, data }: any) => {
         </div>
         <div className={style.body}>
           <div>
-            <p>예약자 목록</p>
+            <p className={style.label}>예약자 목록</p>
             {mates.map((v, i) => (
               <div key={i} className={style.mateList}>
                 <input
                   value={v}
                   onInput={setMate(i)}
-                  className={style.mateInput}
-                  placeholder="여기를 눌러 예약자를 추가하세요." />
-
+                  className={style.input}
+                  placeholder="여기를 눌러 예약자 이름을 작성하세요." />
                 <button
                   className={style.deletemate}
                   onClick={deleteMate(i)}>
@@ -74,38 +80,43 @@ const EditModal = ({ onFinish, data }: any) => {
                 </button>
                </div>
             ))}
-            <button className={style.addmate} onClick={addMate}>
-              <FontAwesomeIcon icon={faPlus} />
-              예약자 추가
-            </button>
+            {mates.length < 6 &&
+              <button className={style.addmate} onClick={addMate}>
+                <FontAwesomeIcon icon={faPlus} />
+                예약자 추가
+              </button>
+            }
           </div>
           <div>
-            <p>동행 선생님</p>
+            <p className={style.label}>동행 선생님</p>
             <ul className={style.list}>
               <li>
                 <input
                   onInput={(e) =>
                     setTeacher((e.target as HTMLInputElement).value)}
                   value={teacher}
-                  className={style.mateInput} />
+                  placeholder="여기를 눌러 선생님 이름을 작성하세요."
+                  className={style.input} />
                 선생님
               </li>
             </ul>
           </div>
           <div>
-            <p>예약 날짜</p>
+            <p className={style.label}>예약 날짜</p>
             <ReactDatePicker
               dateFormat="yyyy-MM-dd"
               selected={date}
-              onChange={(date) => setDate(date!)} />
+              onChange={(date) => setDate(date!)}
+              className={style.input}/>
           </div>
           <div>
-            <p>비밀번호</p>
+            <p className={style.label}>비밀번호</p>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="여기를 눌러 입력하세요" />
+              placeholder="여기를 눌러 입력하세요"
+              className={style.input} />
           </div>
           <div>
             <button className={style.submit} onClick={onSubmit}>

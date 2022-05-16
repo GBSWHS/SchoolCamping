@@ -11,7 +11,3 @@
   @apply flex items-center justify-between p-3 text-xl font-bold border-b border-b-white/50;
 }
 
-.bottom {
-  @apply flex items-center justify-between p-3 text-xl font-bold border-b border-b-white/50;
-}
-
