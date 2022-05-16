@@ -6,7 +6,7 @@
 
 .inner {
   @apply
-  flex flex-col items-center w-11/12
+  flex flex-col items-center w-11/12 md:w-8/12 lg:w-6/12 xl:w-4/12;
 }
 
 .table {
@@ -14,7 +14,7 @@
 }
 
 .table > thead {
-  @apply block w-full py-1 bg-yellow-600 rounded-full;
+  @apply block w-full py-1 bg-yellow-600;
 }
 
 .table > * > tr {

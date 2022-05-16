@@ -1,0 +1,17 @@
+.modal {
+  @apply fixed top-0 z-50 flex items-center justify-center w-screen h-screen text-white bg-black/50;
+}
+
+.window {
+  background: #212121;
+  @apply w-10/12 m-3 md:w-5/12 lg:w-4/12 xl:w-3/12;
+}
+
+.head {
+  @apply flex items-center justify-between p-3 text-xl font-bold border-b border-b-white/50;
+}
+
+.bottom {
+  @apply flex items-center justify-between p-3 text-xl font-bold border-b border-b-white/50;
+}
+
