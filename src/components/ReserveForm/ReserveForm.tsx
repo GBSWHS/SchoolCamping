@@ -1,4 +1,5 @@
 import { faArrowRight, faHome, faPaperPlane, faPlus, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+import moment from 'moment'
 import { motion } from 'framer-motion'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { StaticImage } from 'gatsby-plugin-image'
@@ -95,7 +96,27 @@ const ReserveForm = () => {
     setMates([...mates])
   }
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
+    const res = await fetch('/api/camping/reserve', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        teacher,
+        mates: mates.join(' '),
+        pass: password,
+        date: moment(date).format('YYYY-MM-DD')
+      })
+    }).then((res) => res.json())
+      .catch(_ => {
+        setError('예기치 못한 오류가 발생했습니다. 잠시 후 다시 시도해주세요.')
+      })
+
+    if (!res.success) {
+      setError(res.message)
+      return
+    }
+
+    setError('')
     setStep(5)
   }
 
@@ -202,6 +223,7 @@ const ReserveForm = () => {
                 selected={date}
                 onChange={(date) => setDate(date!)}
                 className={style.input}/>
+              {error && <p>{error}</p>}
               <button onClick={onSubmit}>
                 제출&nbsp;
                 <FontAwesomeIcon icon={faPaperPlane}/>

@@ -21,9 +21,8 @@ const AdminPasswordForm = ({ onFinished }: Props) => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ password })
     }).then(res => res.json())
-      .catch(err => {
+      .catch(_ => {
         setMessage('정보를 확인하는데 실패했습니다.')
-        return err
       })
     if (!res.success) {
       setMessage(res.message)

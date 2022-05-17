@@ -1,4 +1,5 @@
 import React, { createRef, FormEvent, MouseEventHandler, useState } from 'react'
+import moment from 'moment'
 import { motion } from 'framer-motion'
 import * as style from './AdminEditModal.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -42,11 +43,7 @@ const AdminEditModal = ({ onFinish, data }: any) => {
       body: JSON.stringify({
         teacher,
         mates: mates.join(' '),
-        date: {
-          year: date.getFullYear(),
-          month: date.getMonth() + 1,
-          day: date.getDate()
-        }
+        date: moment(date).format('YYYY-MM-DD')
       })
     }).then(res => res.json())
       .catch(err => alert(err.message))
@@ -59,13 +56,6 @@ const AdminEditModal = ({ onFinish, data }: any) => {
     alert('수정되었습니다.')
     onFinish()
   }
-
-  const CalendarViewContainer = ({ _, children }: any) =>
-    <CalendarContainer>
-      <div className={style.calendar}>
-        {children}
-      </div>
-    </CalendarContainer>
 
   return (
     <motion.div
@@ -110,7 +100,7 @@ const AdminEditModal = ({ onFinish, data }: any) => {
           </div>
           <div>
             <p className={style.label}>동행 선생님</p>
-            <ul className={style.list}>
+            <ul>
               <li>
                 <input
                   onInput={(e) =>

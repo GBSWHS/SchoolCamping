@@ -17,7 +17,7 @@ const ListView = () => {
   const [viewModalOpened, setViewModalOpend] = useState(false)
   const [editModalOpened, setEditModalOpend] = useState(false)
   const [deleteModalOpened, setDeleteModalOpend] = useState(false)
-  const { data, error, mutate } = useSWR('https://mocki.io/v1/201d8bfc-c0cc-4427-8fa7-ab7579bf50bc', fetcher)
+  const { data, error, mutate } = useSWR('/api/Camping/reserves', fetcher)
 
   const handleDetail =
     (id: number) => (e: any) => {

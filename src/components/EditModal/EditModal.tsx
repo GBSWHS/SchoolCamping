@@ -82,7 +82,7 @@ const EditModal = ({ onFinish, data }: any) => {
           </div>
           <div>
             <p className={style.label}>동행 선생님</p>
-            <ul className={style.list}>
+            <ul>
               <li>
                 <input
                   onInput={(e) =>
