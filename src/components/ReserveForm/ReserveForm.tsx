@@ -21,7 +21,6 @@ const ReserveForm = () => {
   const { executeRecaptcha } = useGoogleReCaptcha()
   const handleReCaptcha = useCallback(async () => {
     if (!executeRecaptcha) {
-      setError('잠시 후 다시 시도해주세요.')
       return
     }
     setRecaptcha(await executeRecaptcha('reserveform'))
