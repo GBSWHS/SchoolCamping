@@ -6,12 +6,13 @@ phases:
       nodejs: 12
 
     commands:
-      npm install -g pnpm
-      pnpm add -g pnpm
-      pnpm i
+      - n lts
 
   build:
     commands:
+      - npm install -g pnpm
+      - pnpm add -g pnpm
+      - pnpm i
       - pnpm build
 
 artifacts:
