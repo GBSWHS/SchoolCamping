@@ -1,4 +1,5 @@
 import React, { createRef, FormEvent, MouseEventHandler, useState } from 'react'
+import moment from 'moment'
 import { motion } from 'framer-motion'
 import * as style from './EditModal.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -13,6 +14,7 @@ const EditModal = ({ onFinish, data }: any) => {
   const [teacher, setTeacher] = useState<string>(data.teacher)
   const [date, setDate] = useState<Date>(new Date(data.reserved_at))
   const [password, setPassword] = useState<string>('')
+  const [error, setError] = useState<string>('')
 
   const onClickHandler: MouseEventHandler = (e) => {
     const target = e.target as HTMLDivElement
@@ -36,6 +38,23 @@ const EditModal = ({ onFinish, data }: any) => {
   }
 
   const onSubmit = async () => {
+    const res = await fetch('/api/camping/reserve?id=' + data.id, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        teacher,
+        mates: mates.join(' '),
+        date: moment(date).format('YYYY-MM-DD')
+      })
+    }).then(res => res.json())
+      .catch(err => setError(err.message))
+
+    if (!res.success) {
+      setError(res.message)
+      return
+    }
+
+    setError('수정되었습니다.')
     onFinish()
   }
 
@@ -112,6 +131,7 @@ const EditModal = ({ onFinish, data }: any) => {
               className={style.input} />
           </div>
           <div>
+            { error && <p>{error}</p>}
             <button className={style.submit} onClick={onSubmit}>
               저장
             </button>

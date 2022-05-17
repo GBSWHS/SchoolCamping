@@ -8,6 +8,7 @@ import { StaticImage } from 'gatsby-plugin-image'
 const DeleteModal = ({ onFinish, data }: any) => {
   const ref = createRef<HTMLDivElement>()
   const [password, setPassword] = useState<string>('')
+  const [error, setError] = useState<string>('')
 
   const onClickHandler: MouseEventHandler = (e) => {
     const target = e.target as HTMLDivElement
@@ -17,6 +18,17 @@ const DeleteModal = ({ onFinish, data }: any) => {
   }
 
   const onSubmit = async () => {
+    const res = await fetch(`/api/camping/reserve?id=${data.id}&passcode=${password}`, {
+      method: 'DELETE'
+    }).then(res => res.json())
+      .catch(err => setError(err.message))
+
+    if (!res.success) {
+      setError(res.message)
+      return
+    }
+
+    setError('삭제되었습니다.')
     onFinish()
   }
 
@@ -47,6 +59,7 @@ const DeleteModal = ({ onFinish, data }: any) => {
               placeholder="여기를 눌러 입력하세요" />
           </div>
           <div>
+            { error && <p>{error}</p> }
             <button className={style.submit} onClick={onSubmit}>
               삭제
             </button>
