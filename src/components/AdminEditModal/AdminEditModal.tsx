@@ -13,7 +13,7 @@ const AdminEditModal = ({ onFinish, data }: any) => {
   const [mates, setMates] = useState<string[]>(data.mates.split(' '))
   const [teacher, setTeacher] = useState<string>(data.teacher)
   const [date, setDate] = useState<Date>(new Date(data.reserved_at))
-  const [password, setPassword] = useState<string>('')
+  const [error, setError] = useState<string>('')
 
   const onClickHandler: MouseEventHandler = (e) => {
     const target = e.target as HTMLDivElement
@@ -46,14 +46,14 @@ const AdminEditModal = ({ onFinish, data }: any) => {
         date: moment(date).format('YYYY-MM-DD')
       })
     }).then(res => res.json())
-      .catch(err => alert(err.message))
+      .catch(err => setError(err.message))
 
     if (!res.success) {
-      alert(res.message)
+      setError(res.message)
       return
     }
 
-    alert('수정되었습니다.')
+    setError('수정되었습니다.')
     onFinish()
   }
 
@@ -121,6 +121,7 @@ const AdminEditModal = ({ onFinish, data }: any) => {
               className={style.input}/>
           </div>
           <div>
+            { error && <p>{error}</p> }
             <button className={style.submit} onClick={onSubmit}>
               저장
             </button>

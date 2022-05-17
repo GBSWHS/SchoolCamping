@@ -1,12 +1,13 @@
 import { faArrowRight, faHome, faPaperPlane, faPlus, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
-import moment from 'moment'
-import { motion } from 'framer-motion'
+import React, { FormEvent, FormEventHandler, Fragment, KeyboardEventHandler, useCallback, useEffect, useMemo, useState } from 'react'
+import { GoogleReCaptcha, GoogleReCaptchaProvider, useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { StaticImage } from 'gatsby-plugin-image'
-import React, { FormEvent, FormEventHandler, Fragment, KeyboardEventHandler, useState } from 'react'
 import * as style from './ReserveForm.module.css'
 import ReactDatePicker from 'react-datepicker'
+import { motion } from 'framer-motion'
 import { Link } from 'gatsby'
+import moment from 'moment'
 
 const ReserveForm = () => {
   const [step, setStep] = useState(0)
@@ -15,6 +16,20 @@ const ReserveForm = () => {
   const [mates, setMates] = useState<string[]>([])
   const [password, setPassword] = useState('')
   const [date, setDate] = useState(new Date())
+  const [recaptcha, setRecaptcha] = useState('')
+
+  const { executeRecaptcha } = useGoogleReCaptcha()
+  const handleReCaptcha = useCallback(async () => {
+    if (!executeRecaptcha) {
+      setError('잠시 후 다시 시도해주세요.')
+      return
+    }
+    setRecaptcha(await executeRecaptcha('reserveform'))
+  }, [])
+
+  useEffect(() => {
+    handleReCaptcha()
+  }, [handleReCaptcha])
 
   const leaderConfirm = () => {
     if (!mates[0]?.trim()) {
@@ -97,6 +112,12 @@ const ReserveForm = () => {
   }
 
   const onSubmit = async () => {
+    await handleReCaptcha()
+    if (!recaptcha) {
+      setError('잠시 후 다시 시도해주세요.')
+      return
+    }
+
     const res = await fetch('/api/camping/reserve', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -104,11 +125,13 @@ const ReserveForm = () => {
         teacher,
         mates: mates.join(' '),
         pass: password,
-        date: moment(date).format('YYYY-MM-DD')
+        date: moment(date).format('YYYY-MM-DD'),
+        recaptcha
       })
     }).then((res) => res.json())
       .catch(_ => {
         setError('예기치 못한 오류가 발생했습니다. 잠시 후 다시 시도해주세요.')
+        return false
       })
 
     if (!res.success) {

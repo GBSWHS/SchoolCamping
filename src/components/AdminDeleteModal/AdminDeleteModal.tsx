@@ -7,7 +7,7 @@ import { StaticImage } from 'gatsby-plugin-image'
 
 const AdminDeleteMOdal = ({ onFinish, data }: any) => {
   const ref = createRef<HTMLDivElement>()
-  const [password, setPassword] = useState<string>('')
+  const [error, setError] = useState<string>('')
 
   const onClickHandler: MouseEventHandler = (e) => {
     const target = e.target as HTMLDivElement
@@ -20,14 +20,14 @@ const AdminDeleteMOdal = ({ onFinish, data }: any) => {
     const res = await fetch('/api/admin/reserve?id=' + data.id, {
       method: 'DELETE'
     }).then(res => res.json())
-      .catch(err => alert(err.message))
+      .catch(err => setError(err.message))
 
     if (!res.success) {
-      alert(res.message)
+      setError(res.message)
       return
     }
 
-    alert('삭제되었습니다.')
+    setError('삭제되었습니다.')
     onFinish()
   }
 
@@ -49,6 +49,7 @@ const AdminDeleteMOdal = ({ onFinish, data }: any) => {
         </div>
         <div className={style.body}>
           <div>
+            { error && <p>{error}</p> }
             <button className={style.submit} onClick={onSubmit}>
               삭제
             </button>
