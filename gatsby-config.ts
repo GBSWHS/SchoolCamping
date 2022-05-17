@@ -3,9 +3,17 @@ import type { GatsbyConfig } from 'gatsby'
 const config: GatsbyConfig = {
   siteMetadata: {
     title: 'SchoolCamping',
-    siteUrl: 'https://www.yourdomain.tld'
+    siteUrl: 'https://camping.gbsw.hs.kr'
   },
   plugins: [
+    {
+      resolve: 'gatsby-plugin-s3',
+      options: {
+        bucketName: 'schoolcamping-frontend',
+        protocol: 'https',
+        hostname: 'camping.gbsw.hs.kr'
+      }
+    },
     'gatsby-plugin-postcss',
     'gatsby-plugin-pnpm',
     'gatsby-plugin-image',
