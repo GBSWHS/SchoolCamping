@@ -126,7 +126,7 @@ const ReserveForm = () => {
         mates: mates.join(' '),
         pass: password,
         date: moment(date).format('YYYY-MM-DD'),
-        recaptcha
+        recaptcha_key: recaptcha
       })
     }).then((res) => res.json())
       .catch(_ => {
