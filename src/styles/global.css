@@ -7,11 +7,15 @@
 @import '@fontsource/noto-sans-kr/700';
 
 html {
-  @apply text-white bg-[#212121] snap-x scroll-smooth;
+  @apply text-white bg-[#212121] snap-y overflow-y-scroll overflow-x-hidden snap-mandatory scroll-smooth;
 }
 
 body {
   font-family: 'Noto Sans KR', sans-serif;
   
   @apply overflow-x-hidden;
+}
+
+.grecaptcha-badge {
+  visibility: hidden;
 }

@@ -1,6 +1,6 @@
 .bgouter {
   @apply
-  absolute bg-gray-900 top-10 -z-10;
+  absolute top-0 bg-gray-900 -z-10;
 }
 
 .background {
@@ -10,7 +10,7 @@
 
 .outer {
   @apply
-  flex flex-col items-center justify-between w-screen h-screen text-white snap-always snap-center -z-10;
+  flex flex-col items-center justify-between w-screen h-screen text-white -z-10;
 }
 
 .inner {

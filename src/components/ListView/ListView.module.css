@@ -1,6 +1,6 @@
 .outer {
   @apply
-  flex justify-center px-5 py-10 snap-always snap-center;
+  flex justify-center px-5 py-10;
 }
 
 .inner {
