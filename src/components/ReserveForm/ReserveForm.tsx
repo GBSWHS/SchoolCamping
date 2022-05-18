@@ -119,7 +119,10 @@ const ReserveForm = () => {
 
     const res = await fetch('/api/camping/reserve', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        OH_SHIT_DEBUGE: 'youshellnotpass'
+      },
       body: JSON.stringify({
         teacher,
         mates: mates.join(' '),
