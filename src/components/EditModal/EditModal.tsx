@@ -170,15 +170,6 @@ const EditModal = ({ onFinish, data }: any) => {
                   className={style.input}/>
               </div>
               <div>
-                <p className={style.label}>비밀번호</p>
-                <input
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="여기를 눌러 입력하세요"
-                  className={style.input} />
-              </div>
-              <div>
                 { error && <p>{error}</p>}
                 <button className={style.submit} onClick={onSubmit}>
                   저장
