@@ -12,7 +12,7 @@ const EditModal = ({ onFinish, data }: any) => {
   const ref = createRef<HTMLDivElement>()
   const [mates, setMates] = useState<string[]>(data.mates.split(' '))
   const [teacher, setTeacher] = useState<string>(data.teacher)
-  const [date, setDate] = useState<Date>(new Date(data.reserved_at))
+  const [date, setDate] = useState<Date>(new Date(data.reservedAt))
   const [password, setPassword] = useState<string>('')
   const [error, setError] = useState<string>('')
 

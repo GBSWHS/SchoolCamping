@@ -49,7 +49,7 @@ const ViewModal = ({ onFinish, data }: any) => {
           </div>
           <div>
             <p>예약 날짜</p>
-            <i>{moment(data.reserved_at).format('YYYY년 MM월 DD일 (dd)')}</i>
+            <i>{moment(data.reservedAt).format('YYYY년 MM월 DD일 (dd)')}</i>
           </div>
 
           <StaticImage

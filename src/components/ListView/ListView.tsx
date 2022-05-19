@@ -76,7 +76,7 @@ const ListView = () => {
                 <tr key={v.id} onClick={handleDetail(v.id)}>
                   <td>{v.mates.split(' ')[0]}</td>
                   <td>{v.teacher}</td>
-                  <td>{moment(v.reserved_at).format('MM/DD')}</td>
+                  <td>{moment(v.reservedAt).format('MM/DD')}</td>
                   <td className={style.actions}>
                     <FontAwesomeIcon
                       onClick={handleEdit(v.id)}
