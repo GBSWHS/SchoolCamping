@@ -18,7 +18,6 @@ const ReserveForm = () => {
   const [date, setDate] = useState(new Date())
   const [recaptcha, setRecaptcha] = useState('')
 
-  /*
   const { executeRecaptcha } = useGoogleReCaptcha()
   const handleReCaptcha = useCallback(async () => {
     if (!executeRecaptcha) {
@@ -30,7 +29,6 @@ const ReserveForm = () => {
   useEffect(() => {
     handleReCaptcha()
   }, [handleReCaptcha])
-  */
 
   const leaderConfirm = () => {
     if (!mates[0]?.trim()) {
@@ -113,11 +111,11 @@ const ReserveForm = () => {
   }
 
   const onSubmit = async () => {
-    // await handleReCaptcha()
-    // if (!recaptcha) {
-    //   setError('잠시 후 다시 시도해주세요.')
-    //   return
-    // }
+    await handleReCaptcha()
+    if (!recaptcha && step > 3) {
+      setError('잠시 후 다시 시도해주세요.')
+      return
+    }
 
     const res = await fetch('/api/camping/reserve', {
       method: 'POST',
