@@ -52,6 +52,11 @@ const ReserveForm = () => {
       return
     }
 
+    if (teacher.trim().length > 4) {
+      setError('4자 이하로 입력해주세요')
+      return
+    }
+
     setError('')
     setStep(3)
   }
@@ -77,8 +82,8 @@ const ReserveForm = () => {
       return
     }
 
-    if (password.trim().length < 4) {
-      setError('5자 이상입력해 주세요.')
+    if (password.trim().length < 2 || password.trim().length > 4) {
+      setError('2자 이상  4자 이하로 입력해 주세요.')
       return
     }
 
@@ -194,7 +199,7 @@ const ReserveForm = () => {
                   </button>
                  </div>
               ))}
-              {mates.length < 6 &&
+              {mates.length < 8 &&
                 <button className={style.addmate} onClick={addMate}>
                   <FontAwesomeIcon icon={faPlus} />
                   &nbsp;참가자 추가
