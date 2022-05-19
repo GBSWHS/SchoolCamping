@@ -12,7 +12,7 @@ import AdminEditModal from '../AdminEditModal/AdminEditModal'
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json())
 const AdminListView = () => {
-  const { data, error } = useSWR('/api/Auth/reserves', fetcher)
+  const { data, error, mutate } = useSWR('/api/Auth/reserves', fetcher)
   const [infoModalOpened, setInfoModalOpened] = useState(false)
   const [editModalOpened, setEditModalOpened] = useState(false)
   const [deleteModalOpened, setDeleteModalOpened] = useState(false)
@@ -38,6 +38,18 @@ const AdminListView = () => {
     (id: number) => () => {
       setSelected(id)
       setDeleteModalOpened(true)
+    }
+
+  const onEditModalFinished =
+    () => {
+      setEditModalOpened(false)
+      mutate()
+    }
+
+  const onDeleteModalFinished =
+    () => {
+      setDeleteModalOpened(false)
+      mutate()
     }
 
   return (
@@ -89,7 +101,7 @@ const AdminListView = () => {
       <AnimatePresence>
         {editModalOpened &&
            <AdminEditModal
-            onFinish={() => setEditModalOpened(false)}
+            onFinish={onEditModalFinished}
             data={data.data.find((v: any) =>
               v.id === selected)}/>}
       </AnimatePresence>
@@ -99,7 +111,7 @@ const AdminListView = () => {
           <AdminDeleteModal
             data={data.data.find((v: any) =>
               v.id === selected)}
-            onFinish={() => setDeleteModalOpened(false)}/>}
+            onFinish={onDeleteModalFinished}/>}
       </AnimatePresence>
     </div>
   )
