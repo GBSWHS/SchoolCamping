@@ -27,6 +27,7 @@ const EditModal = ({ onFinish, data }: any) => {
       return false
     }
 
+    setError('')
     setMates(res.mates.split(' '))
     setTeacher(res.teacher)
     setDate(new Date(res.reservedAt))
@@ -192,6 +193,7 @@ const EditModal = ({ onFinish, data }: any) => {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="여기를 눌러 입력하세요"
                 className={style.input} />
+              { error && <p>{error}</p>}
               <button className={style.submit} onClick={checkPassword}>
                 확인
               </button>
