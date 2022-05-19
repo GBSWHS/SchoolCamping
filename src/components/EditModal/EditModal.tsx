@@ -16,6 +16,23 @@ const EditModal = ({ onFinish, data }: any) => {
   const [password, setPassword] = useState<string>('')
   const [error, setError] = useState<string>('')
 
+  const checkPassword = async () => {
+    const res = await fetch(`/api/camping/reserve/${data.id}?passcode=${password}`, {
+      method: 'GET'
+    }).then(res => res.json())
+      .catch(err => setError(err.message))
+
+    if (!res.success) {
+      setError(res.message)
+      return false
+    }
+
+    setMates(res.mates.split(' '))
+    setTeacher(res.teacher)
+    setDate(new Date(res.reservedAt))
+    return true
+  }
+
   const onClickHandler: MouseEventHandler = (e) => {
     const target = e.target as HTMLDivElement
     if (target.className === style.modal) {
@@ -95,79 +112,88 @@ const EditModal = ({ onFinish, data }: any) => {
             <FontAwesomeIcon icon={faX}/>
           </button>
         </div>
-        <div className={style.body}>
-          <div>
-            <p className={style.label}>예약자 목록</p>
-            <p>개인정보보호를 위해 예약자 목록을 다시 입력해주세요.</p>
-            {mates.map((v, i) => (
-              <div key={i} className={style.mateList}>
+        { password
+          ? <div className={style.body}>
+              <div>
+                <p className={style.label}>예약자 목록</p>
+                {mates.map((v, i) => (
+                  <div key={i} className={style.mateList}>
+                    <input
+                      value={v}
+                      onInput={setMate(i)}
+                      className={style.input}
+                      placeholder="여기를 눌러 예약자 이름을 작성하세요." />
+                    <button
+                      className={style.deletemate}
+                      onClick={deleteMate(i)}>
+                      <FontAwesomeIcon
+                        icon={faTrashAlt}/>
+                    </button>
+                   </div>
+                ))}
+                {mates.length < 6 &&
+                  <button className={style.addmate} onClick={addMate}>
+                    <FontAwesomeIcon icon={faPlus} />
+                    예약자 추가
+                  </button>
+                }
+              </div>
+              <div>
+                <p className={style.label}>동행 선생님</p>
+                <ul>
+                  <li>
+                    <input
+                      onInput={(e) =>
+                        setTeacher((e.target as HTMLInputElement).value)}
+                      value={teacher}
+                      placeholder="여기를 눌러 선생님 이름을 작성하세요."
+                      className={style.input} />
+                    선생님
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <p className={style.label}>예약 날짜</p>
+                <ReactDatePicker
+                  dateFormat="yyyy-MM-dd"
+                  selected={date}
+                  onChange={(date) => setDate(date!)}
+                  className={style.input}/>
+              </div>
+              <div>
+                <p className={style.label}>비밀번호</p>
                 <input
-                  value={v}
-                  onInput={setMate(i)}
-                  className={style.input}
-                  placeholder="여기를 눌러 예약자 이름을 작성하세요." />
-                <button
-                  className={style.deletemate}
-                  onClick={deleteMate(i)}>
-                  <FontAwesomeIcon
-                    icon={faTrashAlt}/>
-                </button>
-               </div>
-            ))}
-            {mates.length < 6 &&
-              <button className={style.addmate} onClick={addMate}>
-                <FontAwesomeIcon icon={faPlus} />
-                예약자 추가
-              </button>
-            }
-          </div>
-          <div>
-            <p className={style.label}>동행 선생님</p>
-            <p>개인정보보호를 위해 예약자 목록을 다시 입력해주세요.</p>
-            <ul>
-              <li>
-                <input
-                  onInput={(e) =>
-                    setTeacher((e.target as HTMLInputElement).value)}
-                  value={teacher}
-                  placeholder="여기를 눌러 선생님 이름을 작성하세요."
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="여기를 눌러 입력하세요"
                   className={style.input} />
-                선생님
-              </li>
-            </ul>
-          </div>
-          <div>
-            <p className={style.label}>예약 날짜</p>
-            <ReactDatePicker
-              dateFormat="yyyy-MM-dd"
-              selected={date}
-              onChange={(date) => setDate(date!)}
-              className={style.input}/>
-          </div>
-          <div>
-            <p className={style.label}>비밀번호</p>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="여기를 눌러 입력하세요"
-              className={style.input} />
-          </div>
-          <div>
-            { error && <p>{error}</p>}
-            <button className={style.submit} onClick={onSubmit}>
-              저장
-            </button>
-          </div>
+              </div>
+              <div>
+                { error && <p>{error}</p>}
+                <button className={style.submit} onClick={onSubmit}>
+                  저장
+                </button>
+              </div>
 
-          <StaticImage
-            className={style.background}
-            width={100}
-            height={100}
-            placeholder="blurred"
-            alt="스쿨캠핑 로고"
-            src="../../images/icon.png"/>
-        </div>
+              <StaticImage
+                className={style.background}
+                width={100}
+                height={100}
+                placeholder="blurred"
+                alt="스쿨캠핑 로고"
+                src="../../images/icon.png"/>
+            </div>
+          : <div className={style.body}>
+              <p className={style.label}>비밀번호</p>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="여기를 눌러 입력하세요"
+                className={style.input} />
+            </div>
+          }
       </div>
     </motion.div>
   )
