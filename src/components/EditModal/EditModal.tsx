@@ -112,7 +112,7 @@ const EditModal = ({ onFinish, data }: any) => {
             <FontAwesomeIcon icon={faX}/>
           </button>
         </div>
-        { password
+        { mates
           ? <div className={style.body}>
               <div>
                 <p className={style.label}>예약자 목록</p>
@@ -192,6 +192,9 @@ const EditModal = ({ onFinish, data }: any) => {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="여기를 눌러 입력하세요"
                 className={style.input} />
+              <button className={style.submit} onClick={checkPassword}>
+                확인
+              </button>
             </div>
           }
       </div>
