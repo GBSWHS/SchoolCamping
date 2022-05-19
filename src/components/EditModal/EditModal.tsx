@@ -112,7 +112,7 @@ const EditModal = ({ onFinish, data }: any) => {
             <FontAwesomeIcon icon={faX}/>
           </button>
         </div>
-        { mates
+        { mates.length
           ? <div className={style.body}>
               <div>
                 <p className={style.label}>예약자 목록</p>
