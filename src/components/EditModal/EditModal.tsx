@@ -74,6 +74,11 @@ const EditModal = ({ onFinish, data }: any) => {
       return
     }
 
+    if (teacher.length > 4) {
+      setError('교사명은 4자를 넘을 수 없습니다.')
+      return
+    }
+
     if (!password || password.length < 4) {
       setError('비밀번호를 입력해주세요.')
       return
