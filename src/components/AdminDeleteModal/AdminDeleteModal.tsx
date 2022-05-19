@@ -17,7 +17,7 @@ const AdminDeleteMOdal = ({ onFinish, data }: any) => {
   }
 
   const onSubmit = async () => {
-    const res = await fetch('/api/admin/reserve?id=' + data.id, {
+    const res = await fetch('/api/auth/reserve?id=' + data.id, {
       method: 'DELETE'
     }).then(res => res.json())
       .catch(err => setError(err.message))

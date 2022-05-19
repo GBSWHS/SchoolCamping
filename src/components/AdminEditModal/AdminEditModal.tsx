@@ -37,7 +37,7 @@ const AdminEditModal = ({ onFinish, data }: any) => {
   }
 
   const onSubmit = async () => {
-    const res = await fetch('/api/admin/reserve?id=' + data.id, {
+    const res = await fetch('/api/auth/reserve?id=' + data.id, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
