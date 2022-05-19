@@ -117,11 +117,6 @@ const ReserveForm = () => {
 
   const onSubmit = async () => {
     await handleReCaptcha()
-    if (!recaptcha && step > 3) {
-      setError('잠시 후 다시 시도해주세요.')
-      return
-    }
-
     const res = await fetch('/api/camping/reserve', {
       method: 'POST',
       headers: {
