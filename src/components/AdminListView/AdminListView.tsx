@@ -12,7 +12,7 @@ import AdminEditModal from '../AdminEditModal/AdminEditModal'
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json())
 const AdminListView = () => {
-  const { data, error } = useSWR('/api/Camping/reserves', fetcher)
+  const { data, error } = useSWR('/api/Auth/reserves', fetcher)
   const [infoModalOpened, setInfoModalOpened] = useState(false)
   const [editModalOpened, setEditModalOpened] = useState(false)
   const [deleteModalOpened, setDeleteModalOpened] = useState(false)
