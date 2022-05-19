@@ -24,7 +24,9 @@ const DeleteModal = ({ onFinish, data }: any) => {
       .catch(err => setError(err.message))
 
     if (!res.success) {
-      setError(res.message)
+      if (res.message === 'Failed.') {
+        setError('비밀번호가 틀렸습니다.')
+      }
       return
     }
 

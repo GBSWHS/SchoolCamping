@@ -142,7 +142,9 @@ const ReserveForm = () => {
       })
 
     if (!res.success) {
-      setError(res.message)
+      if (res.message === 'already reserved.') {
+        setError('이미 해당 날짜에 예약이 잡혀있습니다.')
+      } else setError(res.message)
       return
     }
 

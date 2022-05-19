@@ -10,8 +10,8 @@ import { StaticImage } from 'gatsby-plugin-image'
 
 const EditModal = ({ onFinish, data }: any) => {
   const ref = createRef<HTMLDivElement>()
-  const [mates, setMates] = useState<string[]>(data.mates.split(' '))
-  const [teacher, setTeacher] = useState<string>(data.teacher)
+  const [mates, setMates] = useState<string[]>([])
+  const [teacher, setTeacher] = useState<string>('')
   const [date, setDate] = useState<Date>(new Date(data.reservedAt))
   const [password, setPassword] = useState<string>('')
   const [error, setError] = useState<string>('')
@@ -38,23 +38,44 @@ const EditModal = ({ onFinish, data }: any) => {
   }
 
   const onSubmit = async () => {
+    if (!mates.filter((v) => v.trim())) {
+      setError('예약자 목록을 입력해주세요.')
+      return
+    }
+
+    if (!teacher.trim()) {
+      setError('선생님을 입력해주세요.')
+      return
+    }
+
+    if (!password || password.length < 4) {
+      setError('비밀번호를 입력해주세요.')
+      return
+    }
+
     const res = await fetch('/api/camping/reserve?id=' + data.id, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         teacher,
-        mates: mates.join(' '),
-        date: moment(date).format('YYYY-MM-DD')
+        mates: mates.filter((v) => v.trim()).join(' '),
+        date: moment(date).format('YYYY-MM-DD'),
+        pass: password
       })
     }).then(res => res.json())
       .catch(err => setError(err.message))
 
     if (!res.success) {
-      setError(res.message)
+      if (res.message === 'Unknown Reserve.') {
+        setError('비밀번호가 잘못되었습니다.')
+      }
+      if (res.message === 'already reserved.') {
+        setError('해당 날짜에 이미 다른 예약이 있습니다. 날짜를 서로 바꾸려면 두팀 다 예약을 삭제하고 새로 만드는것을 추천합니다.')
+      }
       return
     }
 
-    setError('수정되었습니다.')
+    setError('')
     onFinish()
   }
 
@@ -77,6 +98,7 @@ const EditModal = ({ onFinish, data }: any) => {
         <div className={style.body}>
           <div>
             <p className={style.label}>예약자 목록</p>
+            <p>개인정보보호를 위해 예약자 목록을 다시 입력해주세요.</p>
             {mates.map((v, i) => (
               <div key={i} className={style.mateList}>
                 <input
@@ -101,6 +123,7 @@ const EditModal = ({ onFinish, data }: any) => {
           </div>
           <div>
             <p className={style.label}>동행 선생님</p>
+            <p>개인정보보호를 위해 예약자 목록을 다시 입력해주세요.</p>
             <ul>
               <li>
                 <input
