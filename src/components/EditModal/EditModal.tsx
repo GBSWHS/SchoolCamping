@@ -17,20 +17,28 @@ const EditModal = ({ onFinish, data }: any) => {
   const [error, setError] = useState<string>('')
 
   const checkPassword = async () => {
+    if (!password) {
+      setError('비밀번호를 입력해주세요')
+      return
+    }
+
     const res = await fetch(`/api/camping/reserve/${data.id}?passcode=${password}`, {
       method: 'GET'
     }).then(res => res.json())
       .catch(err => setError(err.message))
 
     if (!res.success) {
-      setError(res.message)
+      if (res.message === 'Unknown Reserve.') {
+        setError('비밀번호가 틀렸습니다.')
+        return
+      }
       return false
     }
 
     setError('')
-    setMates(res.mates.split(' '))
-    setTeacher(res.teacher)
-    setDate(new Date(res.reservedAt))
+    setMates(res.data.mates.split(' '))
+    setTeacher(res.data.teacher)
+    setDate(new Date(res.data.reservedAt))
     return true
   }
 
