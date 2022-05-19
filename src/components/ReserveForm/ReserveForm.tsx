@@ -123,7 +123,7 @@ const ReserveForm = () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        OH_SHIT_DEBUG: 'youshellnotpass'
+        OH_SHIT_DEBUG: 'youshallnotpass'
       },
       body: JSON.stringify({
         teacher,
