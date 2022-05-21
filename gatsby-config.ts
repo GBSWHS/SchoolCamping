@@ -22,11 +22,11 @@ const config: GatsbyConfig = {
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
-        name: 'SchoolCamping',
+        name: '스쿨캠핑 - 스쿨캠핑 예약을 쉽고 빠르게',
         short_name: '스쿨캠핑',
         start_url: '/',
-        background_color: '#fafafa',
-        theme_color: '#212121',
+        background_color: '#212121',
+        theme_color: '#fafafa',
         display: 'standalone',
         icon: 'src/images/icon.png'
       }
