@@ -9,15 +9,25 @@ import ViewModal from '../ViewModal/ViewModal'
 import * as style from './ListView.module.css'
 import EditModal from '../EditModal/EditModal'
 import DeleteModal from '../DeleteModal/DeleteModal'
+import useOffline from '../../hooks/useOffline'
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json())
 
 const ListView = () => {
+  const isOffline = useOffline()
   const [selected, setSelected] = useState(0)
   const [viewModalOpened, setViewModalOpend] = useState(false)
   const [editModalOpened, setEditModalOpend] = useState(false)
   const [deleteModalOpened, setDeleteModalOpend] = useState(false)
   const { data, error, mutate } = useSWR('/api/Camping/reserves', fetcher)
+
+  if (isOffline) {
+    return (
+      <div className={style.outer}>
+        오프라인 모드에서는 예약 목록을 불러올 수 없습니다.
+      </div>
+    )
+  }
 
   const handleDetail =
     (id: number) => (e: any) => {

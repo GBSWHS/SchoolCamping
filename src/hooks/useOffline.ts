@@ -5,8 +5,8 @@ let IS_OFFLINE = false
 const checkOffline = () =>
   new Promise<boolean>((resolve) =>
     fetch(window.location.origin)
-      .then((res) => resolve(res.status === 200))
-      .catch(() => resolve(false)))
+      .then((res) => resolve(res.status !== 200))
+      .catch(() => resolve(true)))
 
 setInterval(async () => {
   IS_OFFLINE = await checkOffline()
