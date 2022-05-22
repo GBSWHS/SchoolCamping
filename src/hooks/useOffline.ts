@@ -12,8 +12,10 @@ const intervalFn = async () => {
   IS_OFFLINE = await checkOffline()
 }
 
-intervalFn()
-setInterval(intervalFn, 10 * 1000)
+if (typeof window !== 'undefined') {
+  intervalFn()
+  setInterval(intervalFn, 10 * 1000)
+}
 
 const useOffline = () => {
   const [isOffline, setIsOffline] = useState(IS_OFFLINE)
