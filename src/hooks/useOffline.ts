@@ -8,9 +8,12 @@ const checkOffline = () =>
       .then((res) => resolve(res.status !== 200))
       .catch(() => resolve(true)))
 
-setInterval(async () => {
+const intervalFn = async () => {
   IS_OFFLINE = await checkOffline()
-}, 10 * 1000)
+}
+
+intervalFn()
+setInterval(intervalFn, 10 * 1000)
 
 const useOffline = () => {
   const [isOffline, setIsOffline] = useState(IS_OFFLINE)
