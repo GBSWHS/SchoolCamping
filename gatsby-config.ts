@@ -29,11 +29,6 @@ const config: GatsbyConfig = {
         theme_color: '#212121',
         display: 'standalone',
         icon: 'src/images/icon.png',
-        icons: [{
-          src: 'icons/maskable_icon_x512.png',
-          sizes: '512x512',
-          type: 'image/png'
-        }],
         scope: '/',
         orientation: 'portrait',
         description: '경북소프트웨어고 스쿨캠핑 예약을 위한 웹 애플리케이션입니다.',
