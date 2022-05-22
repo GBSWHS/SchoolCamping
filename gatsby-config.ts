@@ -29,6 +29,11 @@ const config: GatsbyConfig = {
         theme_color: '#212121',
         display: 'standalone',
         icon: 'src/images/icon.png',
+        icons: [{
+          src: 'icons/maskable_icon_x512.png',
+          sizes: '512x512',
+          type: 'image/png'
+        }],
         scope: '/',
         orientation: 'portrait',
         description: '경북소프트웨어고 스쿨캠핑 예약을 위한 웹 애플리케이션입니다.',
@@ -62,7 +67,25 @@ const config: GatsbyConfig = {
             platform: 'narrow',
             label: '관리자 화면'
           }
-        ]
+        ],
+        shortcuts: [
+          {
+            name: '메인페이지',
+            url: '/',
+            description: '스쿨캠핑 예약 현황을 볼 수 있는 메인페이지'
+          },
+          {
+            name: '예약 페이지',
+            url: '/reserve',
+            description: '스쿨캠핑을 예약할 수 있는 예약 페이지'
+          },
+          {
+            name: '관리자 페이지',
+            url: '/admin',
+            description: '스쿨캠핑 예약을 관리할 수 있는 관리자 페이지'
+          }
+        ],
+        categories: ['utilities']
       }
     },
     {
