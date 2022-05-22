@@ -3,7 +3,7 @@
 }
 
 .outer {
-  @apply bg-[#212121] px-10 py-1 pb-2 w-full;
+  @apply bg-[#212121] px-10 py-1 pb-2 w-full flex justify-center;
 }
 
 .inner {
