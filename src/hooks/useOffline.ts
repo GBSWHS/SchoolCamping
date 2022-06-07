@@ -4,8 +4,8 @@ let IS_OFFLINE = false
 
 const checkOffline = () =>
   new Promise<boolean>((resolve) =>
-    fetch(window.location.origin)
-      .then((res) => resolve(res.status !== 200))
+    fetch('/api/camping/health')
+      .then((res) => resolve(res.status !== 404))
       .catch(() => resolve(true)))
 
 const intervalFn = async () => {
