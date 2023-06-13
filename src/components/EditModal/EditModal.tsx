@@ -145,7 +145,7 @@ const EditModal = ({ onFinish, data }: any) => {
                     </button>
                    </div>
                 ))}
-                {mates.length < 6 &&
+                {mates.length < 8 &&
                   <button className={style.addmate} onClick={addMate}>
                     <FontAwesomeIcon icon={faPlus} />
                     예약자 추가
