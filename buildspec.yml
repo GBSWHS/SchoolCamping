@@ -8,7 +8,7 @@ phases:
   build:
     commands:
       - npm install -g pnpm
-      - pnpm i
+      - pnpm i --no-frozen-lockfile
       - pnpm build
 
 artifacts:
