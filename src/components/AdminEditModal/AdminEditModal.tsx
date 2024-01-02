@@ -42,7 +42,7 @@ const AdminEditModal = ({ onFinish, data }: any) => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         teacher,
-        mates: mates.join(' '),
+        mates: mates.map((v) => v.trim()).filter((v) => v).join(' '),
         date: moment(date).format('YYYY-MM-DD')
       })
     }).then(res => res.json())
