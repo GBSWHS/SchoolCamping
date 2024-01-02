@@ -125,7 +125,7 @@ const ReserveForm = () => {
       },
       body: JSON.stringify({
         teacher,
-        mates: mates.filter((v) => v.trim()).join(' '),
+        mates: mates.map((v) => v.trim()).filter((v) => v).join(' '),
         pass: password,
         date: moment(date).format('YYYY-MM-DD'),
         recaptcha_key: recaptcha

@@ -89,7 +89,7 @@ const EditModal = ({ onFinish, data }: any) => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         teacher,
-        mates: mates.filter((v) => v.trim()).join(' '),
+        mates: mates.map((v) => v.trim()).filter((v) => v).join(' '),
         date: moment(date).format('YYYY-MM-DD'),
         pass: password
       })
